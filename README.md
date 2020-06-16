@@ -13,7 +13,7 @@ to run this in docker build the image with the following.
 
 ### Run Image
 
-`docker run -p 14:14 tcpserver
+`docker run -p 14:14 tcpserver`
 
 ### Test command with netcat
 
