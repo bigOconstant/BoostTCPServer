@@ -22,6 +22,6 @@ RUN cmake ..
 RUN make
 
 
-ENTRYPOINT /app/build-dir/tcpserver
+ENTRYPOINT /app/build-dir/tcpserver 1026
 
 

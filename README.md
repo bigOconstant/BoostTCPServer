@@ -13,12 +13,12 @@ to run this in docker build the image with the following.
 
 ### Run Image
 
-`docker run -p 14:14 tcpserver`
+`docker run -p 1026:1026 tcpserver`
 
 ### Test command with netcat
 
 In a seperate terminal type
 
-`netcat localhost 14`
+`netcat localhost 1026`
 
 Then type a word and it should show up in the server

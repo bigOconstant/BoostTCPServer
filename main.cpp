@@ -37,12 +37,12 @@ public:
   {
     message_ = "Received\n";
     boost::array<char, 256> buf;
-      boost::system::error_code error;
+    boost::system::error_code error;
 
-      size_t len = socket_.read_some(boost::asio::buffer(buf), error);
-      std::cout<<"length of read string:"<<len<<std::endl; 
+    size_t len = socket_.read_some(boost::asio::buffer(buf), error);
+    std::cout<<"length of read string:"<<len<<std::endl; 
       
-      std::cout.write(buf.data(), len);
+    std::cout.write(buf.data(), len);
 
     boost::asio::async_write(socket_, boost::asio::buffer(message_),
         boost::bind(&tcp_connection::handle_write, shared_from_this(),
@@ -68,8 +68,8 @@ private:
 class tcp_server
 {
 public:
-  tcp_server(boost::asio::io_context& io_context)
-    : acceptor_(io_context, tcp::endpoint(tcp::v4(), 1026))
+  tcp_server(boost::asio::io_context& io_context,int port)
+    : acceptor_(io_context, tcp::endpoint(tcp::v4(), port))
   {
     start_accept();
   }
@@ -99,13 +99,27 @@ private:
   tcp::acceptor acceptor_;
 };
 
-int main()
+int main(int argc, char *argv[])
 {
+    int port;
+    
+
   try
   {
-    boost::asio::io_context io_context;
-    tcp_server server(io_context);
-    io_context.run();
+       std::istringstream iss( argv[1] );
+        
+
+        if (iss >> port)
+        {
+           boost::asio::io_context io_context;
+            tcp_server server(io_context,port);
+            io_context.run();
+        }
+        else{
+                std::cout<<"Please enter a port number\n";
+        }
+     
+
   }
   catch (std::exception& e)
   {
