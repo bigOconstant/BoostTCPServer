@@ -10,6 +10,7 @@ INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 set( project_sources
    main.cpp
    tcp_connection.cpp
+   tcp_server.cpp
 )
 
 

@@ -16,6 +16,7 @@
  */
 
 using boost::asio::ip::tcp;
+
 class tcp_connection 
 : public boost::enable_shared_from_this<tcp_connection>
 {
