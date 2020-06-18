@@ -16,24 +16,19 @@ int main(int argc, char *argv[])
 {
     int port;
     
-
-  try
-  {
-       std::istringstream iss( argv[1] );
-        
-
-        if (iss >> port)
-        {
-           boost::asio::io_context io_context;
-            tcp_server server(io_context,port);
-            io_context.run();
-        }
-        else{
-                std::cout<<"Please eenter a port number\n";
-        }
-     
-
-  }
+    try
+    {
+        std::istringstream iss( argv[1] );
+            if (iss >> port)
+            {
+            boost::asio::io_context io_context;
+                tcp_server server(io_context,port);
+                io_context.run();
+            }
+            else{
+                    std::cout<<"Please eenter a port number\n";
+            }
+    }
   catch (std::exception& e)
   {
     std::cerr << e.what() << std::endl;

@@ -20,14 +20,14 @@ class tcp_server
 public:
     tcp_server(boost::asio::io_context& io_context,int port)
     : acceptor_(io_context, tcp::endpoint(tcp::v4(), port))
-  {
-    start_accept();
-  }
+    {
+        start_accept();
+    }
 private:
     void start_accept();
     void handle_accept(tcp_connection::pointer new_connection,
-      const boost::system::error_code& error);
-      tcp::acceptor acceptor_;
+    const boost::system::error_code& error);
+    tcp::acceptor acceptor_;
     
 };
 
