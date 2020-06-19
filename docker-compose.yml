@@ -7,6 +7,9 @@ services:
       context: .
       dockerfile: Dockerfile
     command: -c "tail -f /dev/null"
+    environment:
+    - KAFKA_OUTPUT_TOPIC=ingest_syslogs_netdevice
+    - KAFKAADDRESS=kafka:9092
     ports:
       - "514:1026"
     volumes:
@@ -28,7 +31,7 @@ services:
     depends_on:
       - zookeeper
     environment:
-      KAFKA_CREATE_TOPICS: "ingest_streaming_telemetry_tgr:1:1,vrfStats:1:1,test:1:1,rates:1:1,monkey:1:1,oculus.ingest.rates:1:1" # add new topics
+      KAFKA_CREATE_TOPICS: "ingest_streaming_telemetry_tgr:1:1,vrfStats:1:1,test:1:1,rates:1:1,ingest_syslogs_netdevice:1:1,oculus.ingest.rates:1:1" # add new topics
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENERS: INTERNAL://kafka:9092,OUTSIDE://kafka:9094
       KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,OUTSIDE://localhost:9094

@@ -18,7 +18,10 @@ using boost::asio::ip::tcp;
 int main(int argc, char *argv[])
 {
     int port;
-    
+    std::string topic;
+
+  
+   
     try
     {
         std::istringstream iss( argv[1] );

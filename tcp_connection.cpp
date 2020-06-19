@@ -6,6 +6,8 @@ void tcp_connection::start()
     message_ = "Received\n";
     boost::array<char, 456> buf;
     boost::system::error_code error;
+    std::string topic = "default";
+    std::string KafkaAddress = "localhost:9092";
 
     size_t len = socket_.read_some(boost::asio::buffer(buf), error);
     std::cout<<"length of read string:"<<len<<std::endl; 
@@ -17,7 +19,19 @@ void tcp_connection::start()
         
     }
     std::cout<<"string output:"<< message<<std::endl;
-    SendMessage(message,"kafka:9092","monkey");
+    if(const char* env_p = std::getenv("KAFKA_OUTPUT_TOPIC")){
+        std::cout << "Your topic is: " << env_p << '\n';
+        topic = env_p;
+
+    }
+    //KAFKAADDRESS
+    if(const char* env_c = std::getenv("KAFKAADDRESS")){
+        std::cout << "Your kafka address is: " << env_c << '\n';
+        KafkaAddress = env_c;
+
+    }
+    message_ = "sending to topic "+ topic + " on kafka at url "+ KafkaAddress;
+    SendKafkaMessage(message,KafkaAddress,topic);
     
     std::cout<<"done"<<std::endl;
 

@@ -1,3 +1,11 @@
+/*
+Example code takin from https://github.com/edenhill/librdkafka/blob/master/examples/rdkafka_example.cpp
+
+this should be reformatted into a proper object
+
+*/
+
+
 
 #include <iostream>
 #include <string>
@@ -29,7 +37,7 @@ public:
   }
 };
 
-void SendMessage(std::string message, std::string brokers, std::string topic){
+void SendKafkaMessage(std::string message, std::string brokers, std::string topic){
     RdKafka::Conf *conf = RdKafka::Conf::create(RdKafka::Conf::CONF_GLOBAL);
     std::string errstr;
 
