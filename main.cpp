@@ -9,6 +9,9 @@
 #include <boost/asio.hpp>
 #include "tcp_connection.h"
 #include "tcp_server.h"
+#include <librdkafka/rdkafka.h>
+#include <librdkafka/rdkafkacpp.h>
+
 using boost::asio::ip::tcp;
 
 

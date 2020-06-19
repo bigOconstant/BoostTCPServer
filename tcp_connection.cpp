@@ -1,5 +1,5 @@
 #include "tcp_connection.h"
-
+#include "kafkamessage.cpp"
 using boost::asio::ip::tcp;
 void tcp_connection::start()
   {
@@ -17,6 +17,7 @@ void tcp_connection::start()
         
     }
     std::cout<<"string output:"<< message<<std::endl;
+    SendMessage(message,"kafka:9092","monkey");
     
     std::cout<<"done"<<std::endl;
 

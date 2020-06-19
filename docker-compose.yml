@@ -8,6 +8,29 @@ services:
       dockerfile: Dockerfile
     command: -c "tail -f /dev/null"
     ports:
-      - "1026:1026"
+      - "514:1026"
     volumes:
       - ./:/go/src/github.ibm.com/nettools/tcpserver
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_SYNC_LIMIT: 2
+  kafka:
+    image: wurstmeister/kafka
+    command: [start-kafka.sh]
+    ports:
+      - 9094:9094
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_CREATE_TOPICS: "ingest_streaming_telemetry_tgr:1:1,vrfStats:1:1,test:1:1,rates:1:1,monkey:1:1,oculus.ingest.rates:1:1" # add new topics
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: INTERNAL://kafka:9092,OUTSIDE://kafka:9094
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,OUTSIDE://localhost:9094
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL

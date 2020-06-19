@@ -9,6 +9,9 @@ RUN apt-get install libboost-all-dev -y
 
 RUN apt-get install cmake -y
 RUN apt-get install git -y
+RUN apt-get install librdkafka-dev -y
+RUN apt-get install librdkafka++1 -y
+RUN apt-get install gdb -y
 
 
 WORKDIR /app

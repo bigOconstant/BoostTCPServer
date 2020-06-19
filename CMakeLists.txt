@@ -18,7 +18,8 @@ add_executable(${PROJECT_NAME}
   ${project_sources}
 )
 
-target_link_libraries( tcpserver  LINK_PUBLIC ${Boost_LIBRARIES})
+target_link_libraries( tcpserver  LINK_PUBLIC ${Boost_LIBRARIES} -lrdkafka++)
+
 
 
 install(TARGETS tcpserver RUNTIME DESTINATION bin)
