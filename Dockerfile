@@ -8,6 +8,7 @@ RUN apt-get install clang -y
 RUN apt-get install libboost-all-dev -y
 
 RUN apt-get install cmake -y
+RUN apt-get install git -y
 
 
 WORKDIR /app

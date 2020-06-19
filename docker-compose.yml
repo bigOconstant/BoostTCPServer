@@ -1,0 +1,13 @@
+version: '3.2'
+
+services:
+  tcpserver:
+    entrypoint: /bin/bash
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: -c "tail -f /dev/null"
+    ports:
+      - "1026:1026"
+    volumes:
+      - ./:/go/src/github.ibm.com/nettools/tcpserver
