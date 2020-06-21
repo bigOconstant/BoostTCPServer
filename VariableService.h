@@ -13,6 +13,8 @@ public:
 private:
     VariableService(VariableService const&) {}; // private copy constructor
 	VariableService();
+    void ShowUsage(char *appName);
+    void CheckInputExitIfRequiredNotAvailable();
     VariableService& operator=(VariableService const&) {}; //assignment operator is private
 	static VariableService* m_pInstance;
     std::string _topic;

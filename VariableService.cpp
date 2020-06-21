@@ -37,7 +37,7 @@ void VariableService::setValues(int count, char *argv[])
                                     std::cout<<"topic:"<<_topic<<endl;
                                     ++i;//Skip over next iteration
                                     topicFound = true;
-                                    break;
+
                             }
                     }else if ((current == "-port" || current == "-p") && count > i){
                         std::istringstream iss( argv[i+1] );
@@ -46,13 +46,33 @@ void VariableService::setValues(int count, char *argv[])
                             _port = temp_port;
                             portFound = true;
                             ++i;
-                            break;
+
                         }else{
                                 std::cout<<"Invalid Port \n";
                         }
+                    }else if(current == "-h" || current == "-help"){
+                        ShowUsage(argv[0]);
+                        exit(1);
                     }
              }
+             
+             CheckInputExitIfRequiredNotAvailable( );
 };
+
+    void VariableService::ShowUsage(char *appName) {
+        cout<<appName<<" + options"<<endl;
+        cout<<"Options"<<endl;
+        cout<<"-p or -port  <portnumber> "<<endl;
+        cout<<"-t or -topic  <kafka topic> "<<endl;        
+    }
+
+void VariableService::CheckInputExitIfRequiredNotAvailable(){
+    if(!this->portFound){
+            cout<<"Port Number Required"<<endl;
+            cout<<"Type -h or -help to see options"<<endl;
+            exit(1);
+    }
+}
 
 int VariableService::Port(){
         return _port;
