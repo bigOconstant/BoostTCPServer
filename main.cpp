@@ -11,29 +11,25 @@
 #include "tcp_server.h"
 #include <librdkafka/rdkafka.h>
 #include <librdkafka/rdkafkacpp.h>
+#include "VariableService.h"
 
 using boost::asio::ip::tcp;
 
 
 int main(int argc, char *argv[])
 {
-    int port;
-    std::string topic;
+ 
 
+    VariableService::Instance()->Instance()->setValues(argc,argv);
   
    
     try
     {
-        std::istringstream iss( argv[1] );
-            if (iss >> port)
-            {
+   
             boost::asio::io_context io_context;
-                tcp_server server(io_context,port);
-                io_context.run();
-            }
-            else{
-                    std::cout<<"Please eenter a port number\n";
-            }
+            tcp_server server(io_context,VariableService::Instance()->Instance()->Port());
+            io_context.run();
+
     }
   catch (std::exception& e)
   {

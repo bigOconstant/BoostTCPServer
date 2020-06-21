@@ -31,7 +31,7 @@ void tcp_connection::start()
 
     }
     message_ = "sending to topic "+ topic + " on kafka at url "+ KafkaAddress;
-    SendKafkaMessage(message,KafkaAddress,topic);
+    //SendKafkaMessage(message,KafkaAddress,topic);
     
     std::cout<<"done"<<std::endl;
 
