@@ -1,5 +1,6 @@
 #include "tcp_connection.h"
 #include "kafkamessage.cpp"
+#include "VariableService.h"
 using boost::asio::ip::tcp;
 void tcp_connection::start()
   {
@@ -31,7 +32,10 @@ void tcp_connection::start()
 
     }
     message_ = "sending to topic "+ topic + " on kafka at url "+ KafkaAddress;
-    //SendKafkaMessage(message,KafkaAddress,topic);
+    
+    if(VariableService::Instance()->kafkaenabled()){
+        SendKafkaMessage(message,VariableService::Instance()->Kafkaaddress(),std::to_string(VariableService::Instance()->Port()));
+    }
     
     std::cout<<"done"<<std::endl;
 

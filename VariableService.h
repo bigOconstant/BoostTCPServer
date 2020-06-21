@@ -10,20 +10,28 @@ public:
     static VariableService* Instance();
     void setValues(int count, char *argv[]);
     int Port();
+    std::string Topic();
+    std::string Kafkaaddress();
+    bool kafkaenabled();
 private:
     VariableService(VariableService const&) {}; // private copy constructor
 	VariableService();
     void ShowUsage(char *appName);
     void CheckInputExitIfRequiredNotAvailable();
-    VariableService& operator=(VariableService const&) {}; //assignment operator is private
+    //VariableService& operator=(VariableService const&) {}; //assignment operator is private
 	static VariableService* m_pInstance;
+    
     std::string _topic;
     int _port;
+    std::string _kafkaaddress;
     
     bool portFound = false;
     bool topicFound = false;
+    bool kafkaaddressFound = false;
     
 };
 
 
 #endif // TCP_CONNECTION_H
+
+

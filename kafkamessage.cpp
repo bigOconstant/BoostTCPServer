@@ -1,11 +1,9 @@
 /*
-Example code takin from https://github.com/edenhill/librdkafka/blob/master/examples/rdkafka_example.cpp
+Example code taken from https://github.com/edenhill/librdkafka/blob/master/examples/rdkafka_example.cpp
 
 this should be reformatted into a proper object
 
 */
-
-
 
 #include <iostream>
 #include <string>
@@ -102,13 +100,14 @@ retry:
                         const_cast<char *>(line.c_str()), line.size(),
                         /* Key */
                         NULL, 
+                       0,
                         /* Timestamp (defaults to current time) */
                         0,
                         /* Message headers, if any */
-                        NULL,
+                        NULL
                         /* Per-message opaque value passed to
                          * delivery report */
-                        NULL);
+                        );
 
     if (err != RdKafka::ERR_NO_ERROR) {
       std::cerr << "% Failed to produce to topic " << topic << ": " <<
