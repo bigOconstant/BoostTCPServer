@@ -34,7 +34,7 @@ void tcp_connection::start()
     message_ = "sending to topic "+ topic + " on kafka at url "+ KafkaAddress;
     
     if(VariableService::Instance()->kafkaenabled()){
-        SendKafkaMessage(message,VariableService::Instance()->Kafkaaddress(),std::to_string(VariableService::Instance()->Port()));
+        SendKafkaMessage(message,VariableService::Instance()->Kafkaaddress(),VariableService::Instance()->Topic());
     }
     
     std::cout<<"done"<<std::endl;
