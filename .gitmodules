@@ -1,0 +1,6 @@
+[submodule "lib"]
+	path = lib
+	url = https://github.com/edenhill/librdkafka.git
+[submodule "libs/librdkafka"]
+	path = libs/librdkafka
+	url = https://github.com/edenhill/librdkafka
