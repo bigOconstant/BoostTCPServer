@@ -5,7 +5,11 @@ RUN  apt-get upgrade -y
 
 RUN apt-get install clang -y
 RUN apt-get install wget -y
-RUN apt install librdkafka-dev -y
+#RUN apt install librdkafka-dev -y
+RUN apt install zlib1g-dev -y
+RUN apt install libsasl2-dev -y
+RUN apt install libssl-dev -y
+RUN apt-get install rapidjson-dev -y
 
 
 # Install boost manually because we need a newer versino to match osx brew's 1.72. Debian is on a older version as of this writting

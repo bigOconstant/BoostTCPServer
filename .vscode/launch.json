@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/tcpserver",
-            "args": ["-t","ingest_syslogs_netdevice","-ka", "localhost:9094"],
+            "args": ["-t","ingest_syslogs_netdevice","-ka", "kafka:9092"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
