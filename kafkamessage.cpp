@@ -1,7 +1,7 @@
 /*
 Example code taken from https://github.com/edenhill/librdkafka/blob/master/examples/rdkafka_example.cpp
 
-this should be reformatted into a proper object
+this should be reformatted into a proper object. Probably use a library to build on top of it. Probably https://github.com/mfontanini/cppkafka
 
 */
 
