@@ -22,7 +22,7 @@
     }
     std::cout<<"message:"<<message<<std::endl;
     if(VariableService::Instance()->kafkaenabled()){
-        SendKafkaMessage(message,VariableService::Instance()->Kafkaaddress(),VariableService::Instance()->Topic());
+        Kafka::SendKafkaMessage(message,VariableService::Instance()->Kafkaaddress(),VariableService::Instance()->Topic());
     }
 
     boost::asio::async_write(socket_, boost::asio::buffer(message_),
