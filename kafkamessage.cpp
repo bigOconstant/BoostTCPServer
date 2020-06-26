@@ -39,7 +39,7 @@ namespace Kafka {
 
 
 
-  void SendKafkaMessage(std::string message, std::string brokers, std::string topic){
+  void SendKafkaMessage(std::string message, std::string brokers, std::string topic) {
       RdKafka::Conf *conf = RdKafka::Conf::create(RdKafka::Conf::CONF_GLOBAL);
       std::string errstr;
 
@@ -52,6 +52,32 @@ namespace Kafka {
       std::cerr << errstr << std::endl;
       exit(1);
     }
+
+  //if(conf->set(""))
+    if(VariableService::Instance()->SASLenabled()){
+      conf->set("security.protocol", "SASL_PLAINTEXT", errstr);
+      conf->set("sasl.username", VariableService::Instance()->SASLUsername(), errstr);
+      conf->set("sasl.password", VariableService::Instance()->SASLPassword(), errstr);
+      conf->set("sasl.mechanism","PLAIN",errstr);
+      //conf->set("sasl.kerberos.keytab","localhost:9092",errstr); // I have no idea why I need to set this but I do
+      std::cout<<"Setting auth2"<<std::endl;
+      /*if (conf->set("security.protocol", "SASL_PLAINTEXT", errstr) != RdKafka::Conf::CONF_OK) {
+        std::cout<<"outting err auth2"<<std::endl;
+        std::cerr << errstr << std::endl;
+        std::cout<<"Setting protocal"<<std::endl;
+        exit(1);
+      }else if (conf->set("sasl.username", VariableService::Instance()->SASLUsername(), errstr) != RdKafka::Conf::CONF_OK) {
+        std::cout<<"Setting username"<<std::endl;
+        std::cerr << errstr << std::endl;
+        exit(1);
+      }else if (conf->set("sasl.password", VariableService::Instance()->SASLPassword(), errstr) != RdKafka::Conf::CONF_OK) {
+        std::cout<<"Setting password"<<std::endl;
+        std::cerr << errstr << std::endl;
+        exit(1);
+      }
+      */
+    }
+
     signal(SIGINT, sigterm);
     signal(SIGTERM, sigterm);
 
@@ -140,6 +166,9 @@ namespace Kafka {
 
       std::cerr << "% Flushing final messages..." << std::endl;
       producer->flush(10*1000 /* wait for max 10 seconds */);
+
+      std::cout<<"ending function"<<std::endl;
+      return;
   }
 
 }

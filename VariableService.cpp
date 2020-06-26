@@ -13,6 +13,8 @@ VariableService::VariableService()
     _port = 0;
     portFound = false;
     topicFound = false;
+    _SASL_username = "";
+    _SASL_password = "";
     
 }
 
@@ -60,6 +62,12 @@ void VariableService::setValues(int count, char *argv[])
                     } else if((current == "-rm" || current == "-replymessage") && count > i){
                         _replymessage = argv[i+1];
                     }
+                     else if((current == "-su" || current == "-saslusername") && count > i){
+                        _SASL_username = argv[i+1];
+                    }
+                    else if((current == "-sp" || current == "-saslpassword") && count > i){
+                        _SASL_password = argv[i+1];
+                    }
              }
              
              
@@ -76,6 +84,12 @@ void VariableService::setValues(int count, char *argv[])
         }
         if(const char* env_p = std::getenv("REPLYMESSAGE")){
             this->_replymessage = env_p;
+        }
+        if(const char* env_p = std::getenv("SASLUSERNAME")){
+            this->_SASL_username = env_p;
+        }
+        if(const char* env_p = std::getenv("SASLPASSWORD")){
+            this->_SASL_password = env_p;
         }
         
          if(const char* env_p = std::getenv("PORT")){
@@ -101,15 +115,20 @@ void VariableService::setValues(int count, char *argv[])
         cout<<"-p or -port  <portnumber> \n";
         cout<<"-t or -topic  <kafka topic> \n";  
         cout<<"-ka or -kafkaaddress  <kafka address> \n";
-        cout<<"-rm or -replymessage <reply message>\n"; 
+        cout<<"-rm or -replymessage <reply message>\n";
+        cout<<"-sp or -saslpassword <saslpassword>\n"; 
+        cout<<"-u or -saslusername <saslusername>\n"; 
         cout<<"\nAll Options can be over written with Enviornment variables\n\n";
         cout<<"KAFKA_OUTPUT_TOPIC\n";
         cout<<"KAFKAADDRESS\n";
         cout<<"PORT\n";
+        cout<<"SASLUSERNAME\n";
+        cout<<"SASLPASSWORD\n";
         cout<<"REPLYMESSAGE"<<endl;
     }
 
 void VariableService::CheckInputExitIfRequiredNotAvailable(){
+
     if(!this->portFound){
             cout<<"Port Number Required"<<endl;
             cout<<"Type -h or -help to see options"<<endl;
@@ -137,8 +156,20 @@ std::string VariableService::Topic(){
         return _topic;
 }
 
+std::string VariableService::SASLUsername(){
+    return _SASL_username;
+}
+std::string VariableService::SASLPassword(){
+    return _SASL_password;
+}
+
 bool VariableService::kafkaenabled(){
     return (kafkaaddressFound && topicFound);
+}
+
+bool VariableService::SASLenabled(){
+
+    return !((_SASL_username == "") || (_SASL_password == ""));
 }
     
 

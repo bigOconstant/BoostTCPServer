@@ -13,7 +13,10 @@ public:
     std::string Topic();
     std::string Kafkaaddress();
     std::string Replymessage();
+    std::string SASLUsername();
+    std::string SASLPassword();
     bool kafkaenabled();
+    bool SASLenabled();
 private:
     VariableService(VariableService const&) {}; // private copy constructor
 	VariableService();
@@ -26,6 +29,8 @@ private:
     int _port;
     std::string _kafkaaddress;
     std::string _replymessage;
+    std::string _SASL_username;
+    std::string _SASL_password;
     
     bool portFound = false;
     bool topicFound = false;
