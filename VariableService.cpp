@@ -9,6 +9,7 @@ using std::endl;
 VariableService::VariableService()
 {
     _topic = "";
+    _replymessage = "received";
     _port = 0;
     portFound = false;
     topicFound = false;
@@ -56,6 +57,8 @@ void VariableService::setValues(int count, char *argv[])
                     } else if((current == "-ka" || current == "-kafkaaddress" )&& count > i){
                         _kafkaaddress = argv[i+1];
                         kafkaaddressFound = true;
+                    } else if((current == "-rm" || current == "-replymessage") && count > i){
+                        _replymessage = argv[i+1];
                     }
              }
              
@@ -70,6 +73,9 @@ void VariableService::setValues(int count, char *argv[])
         if(const char* env_c = std::getenv("KAFKAADDRESS")){
                 _kafkaaddress = env_c;
                 kafkaaddressFound = true;
+        }
+        if(const char* env_p = std::getenv("REPLYMESSAGE")){
+            this->_replymessage = env_p;
         }
         
          if(const char* env_p = std::getenv("PORT")){
@@ -90,15 +96,17 @@ void VariableService::setValues(int count, char *argv[])
 };
 
     void VariableService::ShowUsage(char *appName) {
-        cout<<appName<<" + options"<<endl;
-        cout<<"\nOptions"<<endl;
-        cout<<"-p or -port  <portnumber> "<<endl;
-        cout<<"-t or -topic  <kafka topic> "<<endl;  
-        cout<<"-ka or -kafkaaddress  <kafka address> "<<endl; 
-        cout<<"\nAll Options can be over written with Enviornment variables\n"<<endl;
-        cout<<"KAFKA_OUTPUT_TOPIC"<<endl;
-        cout<<"KAFKAADDRESS"<<endl;
-        cout<<"PORT"<<endl;
+        cout<<appName<<" + options\n";
+        cout<<"\nOptions\n";
+        cout<<"-p or -port  <portnumber> \n";
+        cout<<"-t or -topic  <kafka topic> \n";  
+        cout<<"-ka or -kafkaaddress  <kafka address> \n";
+        cout<<"-rm or -replymessage <reply message>\n"; 
+        cout<<"\nAll Options can be over written with Enviornment variables\n\n";
+        cout<<"KAFKA_OUTPUT_TOPIC\n";
+        cout<<"KAFKAADDRESS\n";
+        cout<<"PORT\n";
+        cout<<"REPLYMESSAGE"<<endl;
     }
 
 void VariableService::CheckInputExitIfRequiredNotAvailable(){
@@ -116,6 +124,11 @@ void VariableService::CheckInputExitIfRequiredNotAvailable(){
 int VariableService::Port(){
         return _port;
 }
+
+std::string VariableService::Replymessage(){
+    return _replymessage;
+}
+
 
  std::string VariableService::Kafkaaddress(){
      return _kafkaaddress;

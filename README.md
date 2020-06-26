@@ -10,3 +10,7 @@ This repo contains a simple tcp server using C++ and Boost.
 `docker-compose up`
 
 ### Current instructions are broken and need to be fixed to run in container.
+
+### How to Exit
+
+` ctrl_c`

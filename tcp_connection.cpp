@@ -6,7 +6,7 @@
 
   void tcp_connection::start()
   {
-    message_ = "Recieved\n";
+    message_ = VariableService::Instance()->Replymessage()+"\n";
 
     boost::array<char, 456> buf;
     boost::system::error_code error;

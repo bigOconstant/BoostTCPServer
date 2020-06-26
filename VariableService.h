@@ -12,6 +12,7 @@ public:
     int Port();
     std::string Topic();
     std::string Kafkaaddress();
+    std::string Replymessage();
     bool kafkaenabled();
 private:
     VariableService(VariableService const&) {}; // private copy constructor
@@ -24,6 +25,7 @@ private:
     std::string _topic;
     int _port;
     std::string _kafkaaddress;
+    std::string _replymessage;
     
     bool portFound = false;
     bool topicFound = false;
